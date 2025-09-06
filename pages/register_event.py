@@ -17,13 +17,11 @@ def register_event():
         st.warning("Please log in to register for events.")
         return
     
-    cols = st.columns([8, 2])  # Adjust the proportions as needed
+    cols = st.columns([8, 2]) 
 
-    # Add the title to the first column
     with cols[0]:
         st.title("Register for Events")
 
-    # Add the button to the second column
     with cols[1]:
         if st.button("Back to Dashboard"):
             st.session_state.current_page = "Home"

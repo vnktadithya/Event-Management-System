@@ -16,13 +16,11 @@ def my_events():
         st.warning("Please log in to view your events.")
         return
     
-    cols = st.columns([8, 2])  # Adjust the proportions as needed
+    cols = st.columns([8, 2])  
 
-    # Add the title to the first column
     with cols[0]:
         st.title("My Events")
 
-    # Add the button to the second column
     with cols[1]:
         if st.button("Back to Dashboard"):
             st.session_state.current_page = "Home"
@@ -48,22 +46,19 @@ def my_events():
             if registrations:
                 st.subheader("Registered Users:")
                 for registration in registrations:
-                    # Get user details from the User table using the user_id in the Registration table.
                     registered_user = session.query(User).filter_by(user_id=registration.user_id).first()
                     if registered_user:
                         st.write(f"- Name: {registered_user.user_name}, Email: {registered_user.email}, Department: {registered_user.dept}")
                     else:
-                        st.write("- User details not found") # edge case, if user is deleted.
+                        st.write("- User details not found")
             else:
                 st.write("No users registered for this event yet.")
 
             if st.button("Delete Event", key=f"delete_event_{event.event_id}"):
-                # Use a delete statement
                 stmt = delete(Event).where(Event.event_id == event.event_id)
                 session.execute(stmt)
                 session.commit()
                 st.success(f"Event '{event.event_name}' deleted successfully!")
-                # Force refresh
                 st.rerun()
 
 my_events()

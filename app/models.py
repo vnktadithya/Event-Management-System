@@ -4,12 +4,12 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 class User(Base):
-    __tablename__ = 'user' # Explicitly setting tablename is good practice
+    __tablename__ = 'user' 
 
     user_id = Column(Integer, primary_key=True)
     user_name = Column(String(100), nullable=False)
     email = Column(String(100), unique=True, nullable=False)
-    password = Column(String(128), nullable=False) # Added password field (for hashed password)
+    password = Column(String(128), nullable=False) 
     dept = Column(String(50))
 
 class Event(Base):
